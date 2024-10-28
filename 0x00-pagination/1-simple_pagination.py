@@ -33,8 +33,17 @@ class Server:
         return self.__dataset
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
-            pass
-
+        """Get numbers of pages"""
+        assert isinstance(page, int)
+        assert isinstance(page_size, int)
+        assert page > 0
+        assert page_size > 0
+        nums = index_range(page, page_size)
+        dataset()
+        try:
+            return self.__dataset[nums[0]:nums[1]]
+        except ValueError as e:
+            return []
 
 
 def index_range(page: int, page_size: int) -> Tuple[int, ...]:
