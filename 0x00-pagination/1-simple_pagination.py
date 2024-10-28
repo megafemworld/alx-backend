@@ -13,6 +13,13 @@ import math
 from typing import List
 
 
+def index_range(page: int, page_size: int) -> Tuple[int, ...]:
+    """index_range that takes two integer arguments page and page_size"""
+    start: int = (page - 1) * page_size
+    end: int = start + page_size
+    return (start, end)
+
+
 class Server:
     """Server class to paginate a database of popular baby names.
     """
@@ -43,10 +50,3 @@ class Server:
         if i >= len(data_set):
             return []
         return data_set[i:j]
-
-
-def index_range(page: int, page_size: int) -> Tuple[int, ...]:
-    """index_range that takes two integer arguments page and page_size"""
-    start: int = (page - 1) * page_size
-    end: int = start + page_size
-    return (start, end)
