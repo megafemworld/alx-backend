@@ -34,13 +34,14 @@ class Server:
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
         """Get numbers of pages"""
-        assert isinstance(page, int)
-        assert isinstance(page_size, int)
-        assert page > 0
-        assert page_size > 0
-        nums = index_range(page, page_size)
+        assert isinstance(page, int) and isinstance(page_size, int), \
+            "Both page and page_size must be integers."
+        assert page > 0 and page_size > 0, \
+            "Both page and page_size must be greater than 0."
+        i, j = index_range(page, page_size)
+        data_set = self.dataset()
         try:
-            return self.__dataset[nums[0]:nums[1]]
+            return data_set[i:j]
         except ValueError as e:
             return []
 
