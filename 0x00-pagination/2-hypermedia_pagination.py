@@ -53,16 +53,17 @@ class Server:
 
     def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict[str, Any]:
         """Hypermedia pagination"""
-        get_data = self.get_page(self, page, page_size)
+        get_data = self.get_page(page, page_size)
         next_page = page + 1
         prev_page = page - 1
-        total_pages = (len(get_data) + page_size - 1) // page_size
-        if get_data:
-            {
-                "page_size": page_size,
-                "page": page,
-                "data": get_data,
-                "next_page": next_page if next_page <= total_page else None
-                "prev_page": prev_page if page > 1 else None
-                "total_pages": total_pages
-            }
+        total_pages = (len(self.__dataset) + page_size - 1) // page_size
+        return {
+            "page_size": page_size,
+            "page": page,
+            "data": get_data,
+            "next_page": next_page if next_page <= total_pages else None,
+            "prev_page": prev_page if page > 1 else None,
+            "total_pages": total_pages
+        }
+        else:
+            {}
