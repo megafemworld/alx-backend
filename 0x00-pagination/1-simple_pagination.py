@@ -38,16 +38,21 @@ class Server:
         return self.__dataset
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
+        """Get pages of popular baby names from dataset
         """
-        Pagination of dataset
-        """
-        assert type(page) is int and page > 0
-        assert type(page_size) is int and page_size > 0
+        assert type(page) == int
+        assert type(page_size) == int
+        assert page > 0
+        assert page_size > 0
 
-        dataset = self.dataset()
-        data_length = len(dataset)
-        try:
-            index = index_range(page, page_size)
-            return dataset[index[0]:index[1]]
-        except IndexError:
+        start_index, end_index = index_range(page, page_size)
+        if ((len(self.dataset()) < start_index) or
+                (len(self.dataset()) < end_index)):
             return []
+
+        paginated_names = []
+        for i in range(start_index, end_index):
+            paginated_names.append(self.dataset()[i])
+
+        return paginated_names
+
