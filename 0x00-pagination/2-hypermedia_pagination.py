@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
-from typing import Tuple
+from typing import Tuple, List, Dict, Any
 import csv
 import math
-from typing import List
 """
     The function should return a tuple of size two
     containing a start index and an end index corresponding
@@ -51,3 +50,19 @@ class Server:
             return dataset[index[0]:index[1]]
         except IndexError:
             return []
+
+    def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict[str, Any]:
+        """Hypermedia pagination"""
+        get_data = self.get_page(self, page, page_size)
+        next_page = page + 1
+        prev_page = page - 1
+        total_pages = (len(get_data) + page_size - 1) // page_size
+        if get_data:
+            {
+                "page_size": page_size,
+                "page": page,
+                "data": get_data,
+                "next_page": next_page if next_page <= total_page else None
+                "prev_page": prev_page if page > 1 else None
+                "total_pages": total_pages
+            }
