@@ -47,6 +47,6 @@ class Server:
             "Both page and page_size must be greater than 0."
         i, j = index_range(page, page_size)
         data_set = self.dataset()
-        if i >= len(data_set):
+        if i >= len(data_set) or j >= len(data_set):
             return []
         return data_set[i:j]
