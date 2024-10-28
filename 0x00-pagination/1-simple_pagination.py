@@ -40,8 +40,8 @@ class Server:
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
         """Get pages of popular baby names from dataset
         """
-        assert type(page) == int
-        assert type(page_size) == int
+        assert type(page) is int
+        assert type(page_size) is int
         assert page > 0
         assert page_size > 0
 
@@ -55,4 +55,3 @@ class Server:
             paginated_names.append(self.dataset()[i])
 
         return paginated_names
-
