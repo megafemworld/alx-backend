@@ -41,23 +41,15 @@ class Server:
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
         """
-        Given a page number and page size,
-        returns the right page of the dataset
-        Args:
-            page - page
-            page_size - size of page
-        Return:
-            right page of the dataset, empty list if out of range
+        Pagination of dataset
         """
-        assert isinstance(page, int) and isinstance(page_size, int), \
-            "Both page and page_size must be integers."
-        assert page > 0 and page_size > 0, \
-            "Both page and page_size must be greater than 0."
+        assert type(page) is int and page > 0
+        assert type(page_size) is int and page_size > 0
 
-        start_index, end_index = index_range(page, page_size)
         dataset = self.dataset()
-
-        if start_index >= len(dataset):
+        data_length = len(dataset)
+        try:
+            index = index_range(page, page_size)
+            return dataset[index[0]:index[1]]
+        except IndexError:
             return []
-
-        return dataset[start_index:end_index]
