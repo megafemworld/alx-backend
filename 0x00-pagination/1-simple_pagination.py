@@ -39,7 +39,6 @@ class Server:
         assert page > 0
         assert page_size > 0
         nums = index_range(page, page_size)
-        dataset()
         try:
             return self.__dataset[nums[0]:nums[1]]
         except ValueError as e:
