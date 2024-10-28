@@ -40,10 +40,9 @@ class Server:
             "Both page and page_size must be greater than 0."
         i, j = index_range(page, page_size)
         data_set = self.dataset()
-        try:
-            return data_set[i:j]
-        except ValueError as e:
+        if i >= len(data_set):
             return []
+        return data_set[i:j]
 
 
 def index_range(page: int, page_size: int) -> Tuple[int, ...]:
