@@ -4,10 +4,9 @@ from base_caching import BaseCaching
 
 
 class BasicCache(BaseCaching):
-    def __init__(self):
-        """ Initiliaze
-        """
-        super().__init__()
+    """Represents an object that allows storing and
+    retrieving items from a dictionary.
+    """
 
     def put(self, key, item):
         """
