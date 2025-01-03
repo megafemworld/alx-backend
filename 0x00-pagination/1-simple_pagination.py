@@ -63,8 +63,12 @@ class Server:
         return self.__dataset
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
-        """Get pages of popular baby names from dataset
-        Args:
+        """
+        get_page that takes two integer arguments page with default
+        value 1 and page_size with default value 10
+        and returns a list of lists containing the
+        paginated data
+        for those arguments:
             page: int: page number
             page_size: int: number of items per page
         """
