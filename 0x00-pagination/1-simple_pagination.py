@@ -27,7 +27,8 @@ class Server:
         self.__dataset = None
 
     def dataset(self) -> List[List]:
-        """Cached dataset
+        """Cached dataset to be
+        used by get_page method
         """
         if self.__dataset is None:
             with open(self.DATA_FILE) as f:
