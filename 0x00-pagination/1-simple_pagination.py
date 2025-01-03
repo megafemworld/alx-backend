@@ -72,10 +72,14 @@ class Server:
             page: int: page number
             page_size: int: number of items per page
         """
-        assert type(page) is int
-        assert type(page_size) is int
-        assert page > 0
-        assert page_size > 0
+        assert type(page) is int,\
+            "Both page and page_size must be integers."
+        assert type(page_size) is int,\
+            "Both page and page_size must be integers."
+        assert page > 0,\
+            "Both page and page_size must be greater than 0."
+        assert page_size > 0,\
+            "Both page and page_size must be greater than 0."
 
         start_index, end_index = index_range(page, page_size)
         if ((len(self.dataset()) < start_index) or
