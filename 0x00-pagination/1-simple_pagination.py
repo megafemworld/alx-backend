@@ -25,7 +25,25 @@ def index_range(page: int, page_size: int) -> Tuple[int, ...]:
 
 
 class Server:
-    """Server class to paginate a database of popular baby names in chunks
+    """
+    Server class to paginate a database of popular baby names in chunks.
+
+    Attributes:
+        DATA_FILE (str): The path to the CSV file containing the dataset.
+
+    Methods:
+        __init__():
+            Initializes the Server instance with an empty dataset.
+        dataset() -> List[List]:
+            Returns the cached dataset. If the dataset is not cached, it reads
+            the data from the CSV file and caches it.
+        get_page(page: int = 1, page_size: int = 10)
+        -> List[List]:
+            Returns a list of lists containing the
+            paginated data for the specified
+            page and page size. If the page or page size is invalid,
+            it returns an empty list.
+    Server class to paginate a database of popular baby names in chunks
     """
     DATA_FILE = "Popular_Baby_Names.csv"
 
