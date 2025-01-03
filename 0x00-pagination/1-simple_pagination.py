@@ -72,13 +72,9 @@ class Server:
             page: int: page number
             page_size: int: number of items per page
         """
-        assert type(page) is int,\
+        assert isinstance(page, int) and isinstance(page_size, int), \
             "Both page and page_size must be integers."
-        assert type(page_size) is int,\
-            "Both page and page_size must be integers."
-        assert page > 0,\
-            "Both page and page_size must be greater than 0."
-        assert page_size > 0,\
+        assert page > 0 and page_size > 0, \
             "Both page and page_size must be greater than 0."
 
         start_index, end_index = index_range(page, page_size)
