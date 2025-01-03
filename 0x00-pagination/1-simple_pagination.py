@@ -12,12 +12,15 @@ from typing import List
 
 
 def index_range(page: int, page_size: int) -> Tuple[int, ...]:
-    """index_range that takes two integer arguments page and page_size
-    and returns a tuple containing a start index and an end index
+    """
+    Returns a tuple of size two containing a start index and an end index
     corresponding to the range of indexes to return in a list for those
-    args:
-        page: int: page number
-        page_size: int: number of items per page
+    particular pagination parameters.
+    Args:
+        page - page number
+        page_size - page size
+    Return:
+        tuple
     """
     start: int = (page - 1) * page_size
     end: int = start + page_size
@@ -25,25 +28,7 @@ def index_range(page: int, page_size: int) -> Tuple[int, ...]:
 
 
 class Server:
-    """
-    Server class to paginate a database of popular baby names in chunks.
-
-    Attributes:
-        DATA_FILE (str): The path to the CSV file containing the dataset.
-
-    Methods:
-        __init__():
-            Initializes the Server instance with an empty dataset.
-        dataset() -> List[List]:
-            Returns the cached dataset. If the dataset is not cached, it reads
-            the data from the CSV file and caches it.
-        get_page(page: int = 1, page_size: int = 10)
-        -> List[List]:
-            Returns a list of lists containing the
-            paginated data for the specified
-            page and page size. If the page or page size is invalid,
-            it returns an empty list.
-    Server class to paginate a database of popular baby names in chunks
+    """Server class to paginate a database of popular baby names.
     """
     DATA_FILE = "Popular_Baby_Names.csv"
 
@@ -64,13 +49,13 @@ class Server:
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
         """
-        get_page that takes two integer arguments page with default
-        value 1 and page_size with default value 10
-        and returns a list of lists containing the
-        paginated data
-        for those arguments:
-            page: int: page number
-            page_size: int: number of items per page
+        Given a page number and page size,
+        returns the right page of the dataset
+        Args:
+            page - page
+            page_size - size of page
+        Return:
+            right page of the dataset, empty list if out of range
         """
         assert isinstance(page, int) and isinstance(page_size, int), \
             "Both page and page_size must be integers."
