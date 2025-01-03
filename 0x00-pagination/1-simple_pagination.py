@@ -1,49 +1,29 @@
 #!/usr/bin/env python3
-from typing import Tuple
+""" 1-simple_pagination module """
+
 import csv
 import math
-from typing import List
-"""
-    The function should return a tuple of size two
-    containing a start index and an end index corresponding
-    to the range of indexes to return in a list
-    for those particular pagination parameters.
-"""
+from typing import List, Tuple
 
 
-def index_range(page: int, page_size: int) -> Tuple[int, ...]:
-    """index_range that takes two integer arguments page and page_size
-    and returns a tuple containing a start index and an end index
-    corresponding to the range of indexes to return in a list for those
-    args:
-        page: int: page number
-        page_size: int: number of items per page
+def index_range(page: int, page_size: int) -> Tuple[int, int]:
     """
-    start: int = (page - 1) * page_size
-    end: int = start + page_size
-    return (start, end)
+    Returns a tuple of size two containing a start index and an end index
+    corresponding to the range of indexes to return in a list for those
+    particular pagination parameters.
+    Args:
+        page - page number
+        page_size - page size
+    Return:
+        tuple
+    """
+    start = (page - 1) * page_size
+    end = start + page_size
+    return start, end
 
 
 class Server:
-    """
-    Server class to paginate a database of popular baby names in chunks.
-
-    Attributes:
-        DATA_FILE (str): The path to the CSV file containing the dataset.
-
-    Methods:
-        __init__():
-            Initializes the Server instance with an empty dataset.
-        dataset() -> List[List]:
-            Returns the cached dataset. If the dataset is not cached, it reads
-            the data from the CSV file and caches it.
-        get_page(page: int = 1, page_size: int = 10)
-        -> List[List]:
-            Returns a list of lists containing the
-            paginated data for the specified
-            page and page size. If the page or page size is invalid,
-            it returns an empty list.
-    Server class to paginate a database of popular baby names in chunks
+    """Server class to paginate a database of popular baby names.
     """
     DATA_FILE = "Popular_Baby_Names.csv"
 
@@ -51,8 +31,7 @@ class Server:
         self.__dataset = None
 
     def dataset(self) -> List[List]:
-        """Cached dataset to be
-        used by get_page method
+        """Cached dataset
         """
         if self.__dataset is None:
             with open(self.DATA_FILE) as f:
@@ -63,23 +42,23 @@ class Server:
         return self.__dataset
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
-        """Get pages of popular baby names from dataset
-        Args:
-            page: int: page number
-            page_size: int: number of items per page
         """
-        assert type(page) is int
-        assert type(page_size) is int
-        assert page > 0
-        assert page_size > 0
+        Given a page number and page size,
+        returns the right page of the dataset
+        Args:
+            page - page
+            page_size - size of page
+        Return:
+            right page of the dataset, empty list if out of range
+        """
+        assert isinstance(page, int) and isinstance(page_size, int), \
+            "Both page and page_size must be integers."
+        assert page > 0 and page_size > 0, \
+            "Both page and page_size must be greater than 0."
 
         start_index, end_index = index_range(page, page_size)
-        if ((len(self.dataset()) < start_index) or
-                (len(self.dataset()) < end_index)):
+        dataset = self.dataset()
+
+        if start_index >= len(dataset):
             return []
-
-        paginated_names = []
-        for i in range(start_index, end_index):
-            paginated_names.append(self.dataset()[i])
-
-        return paginated_names
+        return dataset[start_index:end_index]
