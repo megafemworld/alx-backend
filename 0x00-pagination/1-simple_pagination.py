@@ -12,14 +12,20 @@ from typing import List
 
 
 def index_range(page: int, page_size: int) -> Tuple[int, ...]:
-    """index_range that takes two integer arguments page and page_size"""
+    """index_range that takes two integer arguments page and page_size
+    and returns a tuple containing a start index and an end index
+    corresponding to the range of indexes to return in a list for those
+    args:
+        page: int: page number
+        page_size: int: number of items per page
+    """
     start: int = (page - 1) * page_size
     end: int = start + page_size
     return (start, end)
 
 
 class Server:
-    """Server class to paginate a database of popular baby names.
+    """Server class to paginate a database of popular baby names in chunks
     """
     DATA_FILE = "Popular_Baby_Names.csv"
 
@@ -40,6 +46,9 @@ class Server:
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
         """Get pages of popular baby names from dataset
+        Args:
+            page: int: page number
+            page_size: int: number of items per page
         """
         assert type(page) is int
         assert type(page_size) is int
